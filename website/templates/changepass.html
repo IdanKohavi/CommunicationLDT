@@ -28,8 +28,18 @@
         
           <div class="card my-5">
 
-            <form class="card-body cardbody-color p-lg-5">
-
+            <form class="card-body cardbody-color p-lg-5" method="POST">
+              {% with messages = get_flashed_messages(with_categories=true) %}
+                {% if messages %}
+                  <div class="flash-messages">
+                    {% for category, message in messages %}
+                      <div class="alert alert-{{ category }}">
+                        {{ message }}
+                      </div>
+                    {% endfor %}
+                  </div>
+                {% endif %}
+              {% endwith %}
               <div class="text-center">
                 <img src="https://cdn-icons-png.flaticon.com/512/6681/6681204.png" class="img-fluid profile-image-pic img-thumbnail rounded-circle my-3"
                   width="200px" alt="profile">
@@ -37,10 +47,13 @@
               <h3 align="center">Change Password</h3>
 
               <div class="mb-3">
-                <input type="old password" class="form-control" id="password" placeholder="old password">
+                <input type="email" class="form-control" id="email" name="email" placeholder="test@gmail.com">
               </div>
               <div class="mb-3">
-                <input type="new password" class="form-control" id="password" placeholder="new password">
+                <input type="old password" class="form-control" id="password" name="oldPassword" placeholder="old password">
+              </div>
+              <div class="mb-3">
+                <input type="new password" class="form-control" id="password" name="newPassword" placeholder="new password">
               </div>
               <div class="text-center"><button type="submit" class="btn btn-color px-5 mb-5 w-100">Submit</button></div>
             </form>
